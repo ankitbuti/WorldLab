@@ -1,0 +1,22 @@
+{
+  "ConfigUrl": "https://app.wizar.io/assets/brands/",
+
+  "Brands": [
+    {
+      "Name": "Wizar",
+      "LogoUrl": "https://app.wizar.io/images/WizAR-Logo.png",
+      "ReleaseDate": "2025-08-01",
+      "Description": "An EdTech gaming platform for AI and AR learning.",
+	  "Version": "0.0.1",
+	  "ActiveStatus": "true"
+    },
+    {
+      "Name": "Truverse",
+      "LogoUrl": "https://trusity.com/wp-content/uploads/2023/10/Trusity_Logo_New-1-300x123.png",
+      "ReleaseDate": "2024-12-15",
+      "Description": "Immersive gamified learning world.",
+	  "Version": "0.0.1",
+	  "ActiveStatus": "false"
+    }
+  ]
+}
