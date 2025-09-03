@@ -1,76 +1,218 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>WizAR Learnverse</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        /* Basic styling for the Unity container */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            background-color: #000;
-            color: #fff;
-            font-family: sans-serif;
-        }
-        #unityContainer {
-            width: 960px;
-            height: 600px;
-            margin: 3rem auto;
-            background-color: #333;
-            position: relative;
-        }
-        #unityContainer canvas {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-        #loadingBar {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <div id="unityContainer">
-        <canvas id="unity-canvas"></canvas>
-        <div id="loadingBar">Loading Learnverse Build....</div>
-    </div>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-    <script>
-        // Specify the path of your Unity WebGL build files folder
-        var buildUrl = "Build";
-        var loaderUrl = buildUrl + "/UnityLoader.js"; // Adjust the loader URL if necessary
+    <!-- Primary SEO -->
+    <title>WizAR LearnVerse | Wizar</title>
+    <meta name="description" content="LearnVerse by Wizar is a game-based platform where kids learn AI and coding through interactive 3D/AR experiences, quests, and activities.">
+    <link rel="canonical" href="https://www.wizar.io/" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="author" content="Wizar Learning Inc.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-        var config = {
-            dataUrl: buildUrl + "/build.data.unityweb",
-            frameworkUrl: buildUrl + "/build.framework.js.unityweb",
-            codeUrl: buildUrl + "/build.wasm.unityweb",
-            streamingAssetsUrl: "StreamingAssets",
-            companyName: "YourCompany",
-            productName: "YourProduct",
-            productVersion: "1.0",
-        };
+    <!-- Optional: keywords -->
+    <meta name="keywords" content="LearnVerse, Wizar, game-based learning, AI for kids, coding for kids, STEM, WebGL, AR learning">
 
-        var container = document.getElementById("unityContainer");
-        var canvas = document.getElementById("unity-canvas");
-        var loadingBar = document.getElementById("loadingBar");
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="LearnVerse">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="WizAR LearnVerse — Game-Based AI & Coding for Kids">
+    <meta property="og:description" content="Interactive AI & coding curriculum through games, AR/3D activities, and quests.">
+    <meta property="og:url" content="https://www.wizar.io/">
+    <meta property="og:image" content="https://www.wizar.io/images/branding/WIZAR-LOGO-2021-meta%20(1).png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="LearnVerse gameplay and AR learning preview">
+    <meta property="og:locale" content="en_US">
 
-        // Load the Unity WebGL build
-        createUnityInstance(canvas, config).then((unityInstance) => {
-            // Hide the loading bar once Unity is loaded
-            loadingBar.style.display = "none";
-            console.log("Unity instance loaded successfully.");
-        }).catch((message) => {
-            alert("Failed to load Unity instance: " + message);
-        });
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WizAR LearnVerse — Game-Based AI & Coding for Kids">
+    <meta name="twitter:description" content="Kids learn AI & coding via interactive, game-based activities.">
+    <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "LearnVerse",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Web",
+      "url": "https://www.wizar.io/",
+      "image": "https://www.wizar.io/TemplateData/og-cover.jpg",
+      "description": "LearnVerse is a game-based platform where kids learn AI and coding through interactive 3D/AR activities and quests.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Wizar Learning Inc.",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.wizar.io/images/branding/WIZAR-LOGO-2021-meta%20(1).png"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
     </script>
 
-    <!-- Make sure to include the UnityLoader script if it's not loaded dynamically -->
-    <script src="Build/UnityLoader.js"></script>
-</body>
+    <link rel="shortcut icon" href="TemplateData/wizarlearning_logo.png">
+    <link rel="stylesheet" href="TemplateData/style.css">
+
+    <!-- Full-viewport canvas overrides -->
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+        background: #000;
+      }
+      #unity-container {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+      }
+      #unity-canvas {
+        width: 100vw !important;
+        height: 100vh !important;
+        display: block;
+      }
+      #unity-loading-bar {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+      }
+      #unity-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+      #unity-warning {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+      }
+      /* Hide the Unity fullscreen button */
+      #unity-fullscreen-button { display: none !important; }
+    </style>
+  </head>
+  <body>
+    <div id="unity-container" class="unity-desktop">
+      <canvas id="unity-canvas" tabindex="-1"></canvas>
+      <div id="unity-loading-bar">
+        <div id="unity-logo"></div>
+        <div id="unity-progress-bar-empty">
+          <div id="unity-progress-bar-full"></div>
+        </div>
+      </div>
+      <div id="unity-warning"></div>
+      <div id="unity-footer">
+        <!-- <div id="unity-webgl-logo"></div> -->
+        <div id="unity-fullscreen-button"></div>
+        <div id="unity-build-title"></div>
+      </div>
+    </div>
+    <script>
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var loadingBar = document.querySelector("#unity-loading-bar");
+      var progressBarFull = document.querySelector("#unity-progress-bar-full");
+      var warningBanner = document.querySelector("#unity-warning");
+
+      function unityShowBanner(msg, type) {
+        function updateBannerVisibility() {
+          warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+        }
+        var div = document.createElement('div');
+        div.innerHTML = msg;
+        warningBanner.appendChild(div);
+        if (type == 'error') div.style = 'background: red; padding: 10px;';
+        else {
+          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+          setTimeout(function () {
+            warningBanner.removeChild(div);
+            updateBannerVisibility();
+          }, 5000);
+        }
+        updateBannerVisibility();
+      }
+
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/Build_v18.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/Build_v18.data",
+        frameworkUrl: buildUrl + "/Build_v18.framework.js",
+        codeUrl: buildUrl + "/Build_v18.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Wizar",
+        productName: "LearnVerse",
+        productVersion: "0.1",
+        showBanner: unityShowBanner
+      };
+
+      // Mobile viewport + class (avoid duplicate viewport tag)
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        if (!document.querySelector('meta[name="viewport"]')) {
+          var meta = document.createElement('meta');
+          meta.name = 'viewport';
+          meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+          document.getElementsByTagName('head')[0].appendChild(meta);
+        }
+        container.className = "unity-mobile";
+        canvas.className = "unity-mobile";
+        // Optional: reduce DPR for perf
+        // config.devicePixelRatio = 1;
+      } else {
+        container.classList.remove('unity-mobile');
+        canvas.classList.remove('unity-mobile');
+      }
+
+      loadingBar.style.display = "block";
+
+      // Handle first interaction → fullscreen (once)
+      let unityInstanceRef = null;
+      let firstInteractionOccurred = false;
+
+      function requestFullscreenOnce() {
+        if (firstInteractionOccurred) return;
+        firstInteractionOccurred = true;
+        if (unityInstanceRef && unityInstanceRef.SetFullscreen) {
+          unityInstanceRef.SetFullscreen(1);
+        }
+      }
+
+      // pointerdown covers mouse + touch; keydown as backup
+      window.addEventListener('pointerdown', requestFullscreenOnce, { once: true, passive: true });
+      window.addEventListener('keydown', requestFullscreenOnce, { once: true });
+
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = (100 * progress) + "%";
+        }).then((unityInstance) => {
+          loadingBar.style.display = "none";
+          unityInstanceRef = unityInstance;
+          // If user already clicked before instance was ready, go fullscreen now
+          if (firstInteractionOccurred) {
+            unityInstanceRef.SetFullscreen(1);
+          }
+        }).catch((message) => {
+          alert(message);
+        });
+      };
+      document.body.appendChild(script);
+    </script>
+  </body>
 </html>
