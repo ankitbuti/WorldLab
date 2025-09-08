@@ -3,118 +3,60 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | LearnVerse</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
-        <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
     <!-- Primary SEO -->
-    <title>WizAR LearnVerse | Wizar</title>
-    <meta name="description" content="LearnVerse by Wizar is a game-based platform where kids learn AI and coding through interactive 3D/AR experiences, quests, and activities.">
+    <title>WizAR | Wizar</title>
+    <meta name="description" content="Learning Experience">
     <link rel="canonical" href="https://www.wizar.io/" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="author" content="Wizar Learning Inc.">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-
     <!-- Optional: keywords -->
     <meta name="keywords" content="LearnVerse, Wizar, game-based learning, AI for kids, coding for kids, STEM, WebGL, AR learning">
-
     <!-- Open Graph -->
     <meta property="og:site_name" content="LearnVerse">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="WizAR LearnVerse — Game-Based AI & Coding for Kids">
-    <meta property="og:description" content="Interactive AI & coding curriculum through games, AR/3D activities, and quests.">
+    <meta property="og:title" content="Wizar — Learning Experience">
+    <meta property="og:description" content="Learning Experience">
     <meta property="og:url" content="https://www.wizar.io/">
     <meta property="og:image" content="https://www.wizar.io/images/branding/WIZAR-LOGO-2021-meta%20(1).png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="LearnVerse gameplay and AR learning preview">
     <meta property="og:locale" content="en_US">
-
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="WizAR LearnVerse — Game-Based AI & Coding for Kids">
-    <meta name="twitter:description" content="Kids learn AI & coding via interactive, game-based activities.">
+    <meta name="twitter:title" content="Wizar — Learning Experience">
+    <meta name="twitter:description" content="Learning Experience">
     <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE">
-
-    <!-- Structured Data (JSON-LD) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "LearnVerse",
-      "applicationCategory": "EducationalApplication",
-      "operatingSystem": "Web",
-      "url": "https://www.wizar.io/",
-      "image": "https://www.wizar.io/TemplateData/og-cover.jpg",
-      "description": "LearnVerse is a game-based platform where kids learn AI and coding through interactive 3D/AR activities and quests.",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Wizar Learning Inc.",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://www.wizar.io/images/branding/WIZAR-LOGO-2021-meta%20(1).png"
-        }
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
-    }
-    </script>
-
+    <title>Wizar | WizAR</title>
     <link rel="shortcut icon" href="TemplateData/wizarlearning_logo.png">
     <link rel="stylesheet" href="TemplateData/style.css">
-
-    <!-- Full-viewport canvas overrides -->
     <style>
+      /* Ensure full-screen rendering */
       html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        overflow: hidden;
-        background: #000;
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          background: black;
       }
       #unity-container {
-        position: fixed;
-        inset: 0;
-        width: 100vw;
-        height: 100vh;
+          width: 100%;
+          height: 100%;
+          position: fixed;
+          top: 0;
+          left: 0;
       }
       #unity-canvas {
-        width: 100vw !important;
-        height: 100vh !important;
-        display: block;
+          width: 100% !important;
+          height: 100% !important;
       }
-      #unity-loading-bar {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        display: none;
-      }
-      #unity-footer {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-      }
-      #unity-warning {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 1000;
-      }
-      /* Hide the Unity fullscreen button */
-      #unity-fullscreen-button { display: none !important; }
-    </style>
+  </style>
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" tabindex="-1"></canvas>
+      <canvas id="unity-canvas" width=960 height=600></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -122,18 +64,18 @@
         </div>
       </div>
       <div id="unity-warning"> </div>
-      <div id="unity-footer">
-        <!-- <div id="unity-webgl-logo"></div> -->
+      <!-- <div id="unity-footer">
+        <div id="unity-webgl-logo"></div>
         <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title"></div>
-      </div>
+        <div id="unity-build-title">WizAR</div>
+      </div> -->
     </div>
     <script>
-
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
       var loadingBar = document.querySelector("#unity-loading-bar");
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
+      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
       var warningBanner = document.querySelector("#unity-warning");
 
       // Shows a temporary message banner/ribbon for a few seconds, or
@@ -161,15 +103,15 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/Build_v19.loader.js";
+      var loaderUrl = buildUrl + "/Wizar_webgl.loader.js";
       var config = {
-        dataUrl: buildUrl + "/Build_v19.data.unityweb",
-        frameworkUrl: buildUrl + "/Build_v19.framework.js.unityweb",
-        codeUrl: buildUrl + "/Build_v19.wasm.unityweb",
+        dataUrl: buildUrl + "/Wizar_webgl.data",
+        frameworkUrl: buildUrl + "/Wizar_webgl.framework.js",
+        codeUrl: buildUrl + "/Wizar_webgl.wasm",
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "Wizar",
-        productName: "LearnVerse",
-        productVersion: "0.1",
+        companyName: "Wizar Learnig Solutions",
+        productName: "WizAR",
+        productVersion: "1",
         showBanner: unityShowBanner,
       };
 
@@ -201,19 +143,14 @@
         canvas.className = "unity-mobile";
         // Optional: reduce DPR for perf
         // config.devicePixelRatio = 1;
-
       } else {
-
         container.classList.remove('unity-mobile');
         canvas.classList.remove('unity-mobile');
       }
-
       loadingBar.style.display = "block";
-
       // Handle first interaction → fullscreen (once)
       let unityInstanceRef = null;
       let firstInteractionOccurred = false;
-
       function requestFullscreenOnce() {
         if (firstInteractionOccurred) return;
         firstInteractionOccurred = true;
@@ -221,11 +158,9 @@
           unityInstanceRef.SetFullscreen(1);
         }
       }
-
       // pointerdown covers mouse + touch; keydown as backup
       window.addEventListener('pointerdown', requestFullscreenOnce, { once: true, passive: true });
       window.addEventListener('keydown', requestFullscreenOnce, { once: true });
-
       var script = document.createElement("script");
       script.src = loaderUrl;
       script.onload = () => {
@@ -242,7 +177,7 @@
           alert(message);
         });
       };
-
+      document.body.appendChild(script);
     </script>
   </body>
 </html>
